@@ -48,5 +48,9 @@
   },
   "devDependencies": {
     "tailwindcss": "^3.4.1"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/nitin864/Daphin.git",
+  "author": "Ankit Kumar <ankigray@outlook.com>",
+  "license": "MIT"
 }
