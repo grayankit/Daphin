@@ -1,6 +1,6 @@
-import React, { useState, useEffect ,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 //import SignOut from "./SignOut";
-import { db ,auth } from "../firebase";
+import { db, auth } from "../firebase";
 import {
   collection,
   query,
@@ -9,16 +9,18 @@ import {
   onSnapshot,
 } from "firebase/firestore";
 import SendMessage from "./SendMessage";
-import Navbar from "./Navbar";
- 
 
 function Chat() {
-  const scroll = useRef()
+  const scroll = useRef();
   const [messages, setMessages] = useState([]);
 
   useEffect(() => {
     const fetchMessages = async () => {
-      const q = query(collection(db, "messages"), orderBy("createdAt"), limit(50));
+      const q = query(
+        collection(db, "messages"),
+        orderBy("createdAt"),
+        limit(50)
+      );
 
       const unsubscribe = onSnapshot(q, (snapshot) => {
         const messageData = [];
@@ -37,24 +39,26 @@ function Chat() {
 
   return (
     <div>
-    <Navbar/>
-     
-    <div className="msgs">
-        {messages.map(({ id, text, photoURL, uid , email }) => (
-            <div>
-              
-              {/* <h1>{localStorage.getItem('user')}</h1> */}
-                <div key={id} className={`msg ${uid === auth.currentUser.uid ? 'sent' : 'received'}`}>
-                    <h4>{email}</h4>
-                    <img src={photoURL}   />
-                    <p>{text}</p>
-                </div>
+      <div className="msgs">
+        {messages.map(({ id, text, photoURL, uid, email }) => (
+          <div>
+            {/* <h1>{localStorage.getItem('user')}</h1> */}
+            <div
+              key={id}
+              className={`msg ${
+                uid === auth.currentUser.uid ? "sent" : "received"
+              }`}
+            >
+              <h4>{email}</h4>
+              <img src={photoURL} alt="" />
+              <p>{text}</p>
             </div>
+          </div>
         ))}
+      </div>
+      <SendMessage scroll={scroll} />
+      <div ref={scroll}></div>
     </div>
-    <SendMessage scroll={scroll} />
-    <div ref={scroll}></div>
-</div>
   );
 }
 

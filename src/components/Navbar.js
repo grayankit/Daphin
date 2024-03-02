@@ -5,9 +5,11 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
+import { useAuthState } from "react-firebase-hooks/auth";
 import MenuIcon from '@mui/icons-material/Menu';
 import {auth} from '../firebase'
 export default function ButtonAppBar() {
+  const [user] = useAuthState(auth);
   const handleSignout = () => {
     auth.signOut()
 }
@@ -27,7 +29,8 @@ export default function ButtonAppBar() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             Daphin
           </Typography>
-          <Button variant="contained" color="error" onClick={handleSignout} >Logout</Button>
+
+          {user ? <Button variant="contained" color="error" onClick={handleSignout} >Logout</Button>:<div></div>}
         </Toolbar>
       </AppBar>
     </Box>
