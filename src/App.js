@@ -8,6 +8,7 @@ import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user] = useAuthState(auth);
+  //Just
   return (
     <>
         <Navbar />
