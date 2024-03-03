@@ -13,7 +13,7 @@ function App() {
     <>
         <Navbar />
         <ToastContainer />
-      <div className="flex items-center my-[13rem] mx-[26rem]">{user ? <Chat /> : <SignIn />}</div>
+      {user ? <Chat /> :<div className="flex items-center my-[13rem] mx-[26rem]"> <SignIn /> </div>}
     </>
   );
 }
